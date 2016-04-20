@@ -7,7 +7,11 @@ class QuestionsController < ApplicationController
     questions = ware.questions.page(params[:page]).per(15)
 
     data = questions.map do |question|
-      DataFormer.new(question).data
+      DataFormer.new(question)
+        .url(:show_url)
+        .url(:update_url)
+        .url(:delete_url)
+        .data
     end
 
     result = {
@@ -25,8 +29,40 @@ class QuestionsController < ApplicationController
     _process_targetable(question)
 
     save_model(question) do |q|
-      DataFormer.new(q).data
+      DataFormer.new(q)
+        .url(:show_url)
+        .url(:update_url)
+        .url(:delete_url)
+        .data
     end
+  end
+
+  def show
+    question = QuestionMod::Question.find params[:id]
+    @page_name = "question_show"
+    @component_data = DataFormer.new(question)
+      .url(:show_url)
+      .url(:update_url)
+      .url(:delete_url)
+      .data
+  end
+
+  def update
+    question = QuestionMod::Question.find params[:id]
+
+    update_model(question, question_params) do |_question|
+      DataFormer.new(_question)
+        .url(:show_url)
+        .url(:update_url)
+        .url(:delete_url)
+        .data
+    end
+  end
+
+  def destroy
+    question = QuestionMod::Question.find params[:id]
+    question.destroy
+    render :status => 200, :json => {:status => 'success'}
   end
 
   private

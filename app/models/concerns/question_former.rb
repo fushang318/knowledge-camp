@@ -13,6 +13,18 @@ module QuestionFormer
       }
       field :created_at
       field :updated_at
+
+      url :show_url, ->(instance){
+        question_path(instance)
+      }
+
+      url :update_url, ->(instance){
+        question_path(instance)
+      }
+
+      url :delete_url, ->(instance){
+        question_path(instance)
+      }
     end
 
   end
