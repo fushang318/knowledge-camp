@@ -1,0 +1,9 @@
+production:
+  clients:
+    default:
+      database: <%= ENV["MONGODB_INSTANCE_NAME"] %>
+      hosts:
+        - <%= "#{ENV["MONGODB_PORT_27017_TCP_ADDR"]}:#{ENV["MONGODB_PORT_27017_TCP_PORT"]}" %>
+      options:
+        user: <%= ENV["MONGODB_USERNAME"] %>
+        password: <%= ENV["MONGODB_PASSWORD"] %>
