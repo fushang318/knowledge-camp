@@ -1,0 +1,24 @@
+development:
+  sessions:
+    default:
+      database: knowledge-camp-development
+      hosts:
+        - mongodb:27017
+
+test:
+  sessions:
+    default:
+      database: knowledge-camp-test
+      hosts:
+        - mongodb:27017
+      options:
+        read: primary
+        max_retries: 1
+        retry_interval: 0
+
+production:
+  sessions:
+    default:
+      database: knowledge-camp-production
+      hosts:
+        - mongodb:27017
