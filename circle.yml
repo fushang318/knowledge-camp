@@ -2,6 +2,9 @@ general:
   branches:
     only:
       - test_circleci
+  artifacts:
+    - "log/"
+    # - "selenium/screenshots"
 
 machine:
   timezone: Asia/Shanghai
