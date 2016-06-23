@@ -19,8 +19,8 @@ dependencies:
     - sudo apt-get install -y qt5-default libqt5webkit5-dev qtdeclarative5-dev g++  xvfb ffmpeg
 
   override:
-    - sed -i 's/https:\/\/ruby.taobao.org/https:\/\/rubygems.org/g' sample/Gemfile
-    - cd sample; bundle
+    - sed -i 's/https:\/\/ruby.taobao.org/https:\/\/rubygems.org/g' Gemfile
+    - bundle
 
 test:
   override:
