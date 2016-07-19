@@ -100,6 +100,9 @@ Rails.application.routes.draw do
 
         get :design, on: :member
         put :design_update, on: :member
+
+        get  :edit_business_categories,   on: :member
+        put :update_business_categories, on: :member
       end
       get '/teller_wares/:number/preview' => "teller_wares#preview", as: :preview
 

@@ -6,6 +6,14 @@ module Finance::TellerWareFormer
     former 'Finance::TellerWare' do
       field :id, ->(instance) {instance.id.to_s}
       field :name
+      field :business_categories, ->(instance){
+        instance.business_categories.map do |bc|
+          {
+            id: bc.id.to_s,
+            name: bc.name
+          }
+        end
+      }
       field :number
       field :business_kind
       field :gtd_status
@@ -53,6 +61,10 @@ module Finance::TellerWareFormer
 
       url :design_update_url, ->(instance) {
         design_update_manager_finance_teller_ware_path instance
+      }
+
+      url :manager_edit_business_categories_url, ->(instance) {
+        edit_business_categories_manager_finance_teller_ware_path instance
       }
     end
 
