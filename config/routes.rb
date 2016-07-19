@@ -75,7 +75,10 @@ Rails.application.routes.draw do
     end
 
     resources :business_categories
-    resources :enterprise_posts
+    resources :enterprise_posts do
+      get  :edit_business_categories,   on: :member
+      put :update_business_categories, on: :member
+    end
     resources :enterprise_levels
 
     scope :path => '/finance', module: 'finance', as: :finance do
