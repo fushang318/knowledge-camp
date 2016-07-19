@@ -69,7 +69,14 @@ module WareFormer
       field :id, ->(instance) {instance.id.to_s}
       field :name
       field :kind, ->(instance) { "document" }
-
+      field :business_categories, ->(instance){
+        instance.business_categories.map do |bc|
+          {
+            id: bc.id.to_s,
+            name: bc.name
+          }
+        end
+      }
       logic :learned, ->(instance, user) {
         percent = instance.read_percent_of_user(user)
         learned = 'done' if percent == 100
@@ -98,6 +105,13 @@ module WareFormer
         manager_ware_path(instance)
       }
 
+      url :manager_edit_base_info_url, ->(instance){
+        edit_manager_simple_document_ware_path(instance)
+      }
+
+      url :manager_edit_business_categories_url, ->(instance){
+        edit_business_categories_manager_simple_document_ware_path(instance)
+      }
     end
 
     former "KcCourses::SimpleAudioWare" do

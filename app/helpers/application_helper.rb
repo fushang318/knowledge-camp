@@ -8,7 +8,12 @@ module ApplicationHelper
             name: '视频课件',
             url: manager_simple_video_wares_path,
             icon: 'video'
-          }
+          },
+          {
+            name: '文档课件',
+            url: manager_simple_document_wares_path,
+            icon: 'file'
+          },
         ]
       },
       {

@@ -74,6 +74,12 @@ Rails.application.routes.draw do
       put :update_business_categories, on: :member
     end
 
+    # 文档课件管理
+    resources :simple_document_wares  do
+      get  :edit_business_categories,   on: :member
+      put :update_business_categories, on: :member
+    end
+
     resources :business_categories
     resources :enterprise_posts do
       get  :edit_business_categories,   on: :member
