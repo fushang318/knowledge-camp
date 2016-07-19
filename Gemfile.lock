@@ -7,8 +7,8 @@ GIT
 
 GIT
   remote: git://github.com/mindpin/bank.git
-  revision: ed317b0ccf57c437a9c14d83c0ad8fe32a041b34
-  ref: ed317b0
+  revision: aba3072ecdb4d562e151068f50c27a679b98a817
+  ref: aba3072
   specs:
     bank (0.1.0)
       mongoid-tree (~> 2.0)
@@ -427,5 +427,8 @@ DEPENDENCIES
   unicorn
   web-console (~> 2.0)
 
+RUBY VERSION
+   ruby 2.2.5p319
+
 BUNDLED WITH
-   1.11.2
+   1.12.5

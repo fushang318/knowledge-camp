@@ -243,3 +243,4 @@
 
   OneImageUploadField: null # 在 data_form/image_upload.coffee 中定义
   OneVideoUploadField: null
+  OneFileUploadField: null

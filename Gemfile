@@ -70,7 +70,7 @@ gem 'kc_courses',
 
 gem 'bank',
     github: "mindpin/bank",
-    ref: "ed317b0"
+    ref: "aba3072"
 
 gem 'enterprise_position_level',
     github: "mindpin/enterprise_position_level",
