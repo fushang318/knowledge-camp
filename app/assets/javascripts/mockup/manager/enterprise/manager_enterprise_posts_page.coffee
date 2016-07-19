@@ -116,19 +116,11 @@
             number: '编号'
             name: '岗位名称'
             levels: '级别配置'
-            business_categories: '所属业务类别'
             ops: '操作'
           data_set: @props.data.map (x)=>
             id: x.id
             number: x.number
             name: x.name
-            business_categories:
-              <div>
-              {
-                for bc in x.business_categories
-                  <div>{bc.name}</div>
-              }
-              </div>
             ops:
               <div>
                 <a href='javascript:;' className='ui basic button blue mini' onClick={@edit(x)}>
