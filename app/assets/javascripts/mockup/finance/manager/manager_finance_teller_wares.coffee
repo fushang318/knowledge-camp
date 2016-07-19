@@ -30,6 +30,10 @@
                   <a href={x.design_url} target='_blank' className='ui basic button mini'>
                     <i className='icon configure' /> 设计器
                   </a>
+                  <a href={x.manager_edit_business_categories_url} className='ui basic button mini'>
+                    <i className='icon pencil' />
+                    业务类别修改
+                  </a>
                 </div>
             }
           th_classes:

@@ -16,6 +16,7 @@ class Manager::Finance::TellerWaresController < ApplicationController
         .logic(:business_kind_str)
         .url(:preview_url)
         .url(:design_url)
+        .url(:manager_edit_business_categories_url)
         .data
     }
 
@@ -110,7 +111,7 @@ class Manager::Finance::TellerWaresController < ApplicationController
     data = DataFormer.new(screen)
       .logic(:selects)
       .data
-    render json: data 
+    render json: data
   end
 
   def edit_screen_sample
@@ -175,6 +176,36 @@ class Manager::Finance::TellerWaresController < ApplicationController
     render json: {}
   end
 
+  def edit_business_categories
+    ware = ::Finance::TellerWare.find params[:id]
+
+    business_categories = Bank::BusinessCategory.all.map do |bc|
+      DataFormer.new(bc).data
+    end
+
+    @page_name = "manager_edit_business_categories_finance_teller_ware"
+    @component_data = {
+      finance_teller_ware: DataFormer.new(ware).data,
+      business_categories: business_categories,
+      update_business_categories_url: update_business_categories_manager_finance_teller_ware_path(ware)
+    }
+  end
+
+  def update_business_categories
+    ware = ::Finance::TellerWare.find params[:id]
+
+    update_params = params.require(:teller_wares).permit(business_category_ids: [])
+
+    update_model(ware, update_params) do |c|
+      DataFormer.new(c)
+        .logic(:business_kind_str)
+        .url(:preview_url)
+        .url(:design_url)
+        .url(:manager_edit_business_categories_url)
+        .data
+        .merge jump_url: manager_finance_teller_wares_path
+    end
+  end
   # # 从 json 创建 ::Finance::TellerWareXxmx
   # def _read_xxmx_json_data
   #   file = '/web/ben7th/bank-logic/xxmx.json'
@@ -243,7 +274,7 @@ class Manager::Finance::TellerWaresController < ApplicationController
   #     screens.each do |screen|
   #       tws = ::Finance::TellerWareScreen.new({
   #         hmdm: screen['hmdm'],
-  #         zds: screen['zds']  
+  #         zds: screen['zds']
   #       })
   #       tws.save
   #     end
