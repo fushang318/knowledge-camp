@@ -27,8 +27,8 @@
             put={@props.data.update_base_info_url}
             done={@done}
           >
-            <TextInputField {...layout} label='课程名：' name='name' required />
-            <TextAreaField {...layout} label='课程简介：' name='desc' rows={10} />
+            <TextInputField {...layout} label='课件名：' name='name' required />
+            <TextAreaField {...layout} label='课件简介：' name='desc' rows={10} />
             <Submit {...layout} text='确定保存' />
           </SimpleDataForm>
         </div>

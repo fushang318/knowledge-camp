@@ -40,8 +40,8 @@
             post={@props.data.create_simple_document_ware_url}
             done={@done}
           >
-            <TextInputField {...layout} label='文档课件名：' name='name' required />
-            <TextAreaField {...layout} label='文档课件简介：' name='desc' rows={10} />
+            <TextInputField {...layout} label='课件名：' name='name' required />
+            <TextAreaField {...layout} label='课件简介：' name='desc' rows={10} />
             <OneFileUploadField {...layout}  label='文档：' name='file_entity_id' title="123" {...file_upload_field_data}/>
             <Submit {...layout} text='确定保存' />
           </SimpleDataForm>
