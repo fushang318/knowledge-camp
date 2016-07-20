@@ -4,7 +4,7 @@
 
   render: ->
     <div className='ui icon input'>
-      <input type='text' placeholder='搜索课程…' value={@state.query} onChange={@change} onKeyPress={@enter_submit} />
+      <input type='text' placeholder='搜索课件…' value={@state.query} onChange={@change} onKeyPress={@enter_submit} />
       <i className='search link icon' onClick={@search}></i>
     </div>
 

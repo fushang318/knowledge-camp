@@ -23,14 +23,19 @@
         {name: cs.name, url: subject_path(cs.id)}
       end
 
+      #nav_items.push({
+      #  name: '全部课程',
+      #  url: subject_path("all")
+      #})
+
       nav_items.push({
-        name: '全部课程',
-        url: subject_path("all")
+        name: '全部业务',
+        url: business_categories_path
       })
 
       nav_items.push({
-        name: '业务查找',
-        url: business_categories_path
+        name: '我的业务',
+        url: my_business_categories_path
       })
 
       if current_user.blank?
@@ -41,7 +46,10 @@
         current_user_data = nil
       else
         right_data = {}
-        current_user_data = DataFormer.new(current_user).url(:user_dashboard_url).data
+        current_user_data = DataFormer.new(current_user)
+          .data
+          #.url(:user_dashboard_url)
+
       end
 
 

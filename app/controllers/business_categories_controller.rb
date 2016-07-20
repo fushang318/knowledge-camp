@@ -6,8 +6,7 @@ class BusinessCategoriesController < ApplicationController
 
     if params[:pid].blank?
       parents_data = []
-      root = Bank::BusinessCategory.where(parent_id: nil).first
-      data = root.children.map {|x|
+      data = Bank::BusinessCategory.roots.map {|x|
         DataFormer.new(x).logic(:is_leaf).data
       }
     else
@@ -16,13 +15,12 @@ class BusinessCategoriesController < ApplicationController
         DataFormer.new(x).logic(:is_leaf).data
       }
       parent_ids = parent_bc.parent_ids + [parent_bc.id]
-      parent_ids.shift
       parents_data = parent_ids.map {|id|
         c = Bank::BusinessCategory.find id
 
         {
           category: DataFormer.new(c).data,
-          siblings: c.parent.children.map {|x|
+          siblings: c.siblings_and_self.map {|x|
             DataFormer.new(x).data
           }
         }
@@ -33,6 +31,23 @@ class BusinessCategoriesController < ApplicationController
       parents_data: parents_data,
       categories: data
     }
+  end
+
+  def my
+    @page_name = "post_business_categories"
+
+    post = EnterprisePositionLevel::Post.all[2]
+
+    if params[:pid].blank?
+      @component_data = DataFormer.new(post)
+        .logic(:business_category_tree, nil)
+        .data[:business_category_tree]
+    else
+      parent_bc = Bank::BusinessCategory.find params[:pid]
+      @component_data = DataFormer.new(post)
+        .logic(:business_category_tree, parent_bc)
+        .data[:business_category_tree]
+    end
   end
 
   def show
