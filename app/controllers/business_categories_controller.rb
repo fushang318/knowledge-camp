@@ -39,15 +39,30 @@ class BusinessCategoriesController < ApplicationController
     post = EnterprisePositionLevel::Post.all[2]
 
     if params[:pid].blank?
-      @component_data = DataFormer.new(post)
-        .logic(:business_category_tree, nil)
-        .data[:business_category_tree]
+      parents_data = []
+      data = post.root_business_categories.map {|x|
+        DataFormer.new(x).logic(:is_leaf).data
+      }
     else
       parent_bc = Bank::BusinessCategory.find params[:pid]
-      @component_data = DataFormer.new(post)
-        .logic(:business_category_tree, parent_bc)
-        .data[:business_category_tree]
+      data = post.children_business_categories(parent_bc).map {|x|
+        DataFormer.new(x).logic(:is_leaf).data
+      }
+      parent_ids = parent_bc.parent_ids + [parent_bc.id]
+      parents_data = parent_ids.map {|id|
+        c = Bank::BusinessCategory.find id
+        {
+          category: DataFormer.new(c).data,
+          siblings: post.siblings_and_self_business_categories(c).map {|x|
+            DataFormer.new(x).data
+          }
+        }
+      }
     end
+    @component_data = {
+      parents_data: parents_data,
+      categories: data
+    }
   end
 
   def show
