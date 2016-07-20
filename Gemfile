@@ -47,7 +47,7 @@ gem "mongoid", "~> 4.0.0"
 gem "bson_ext"
 gem "unicorn"
 gem "streamio-ffmpeg"
-
+gem 'redis', '~>3.2'
 # -------------
 gem "mina", "0.3.7"
 

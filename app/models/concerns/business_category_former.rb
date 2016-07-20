@@ -11,6 +11,9 @@ module BusinessCategoryFormer
         parent_id = instance.parent_id
         parent_id ? parent_id.to_s : nil
       }
+      field :parent_ids, ->(instance) {
+        instance.parent_ids.map{|parent_id|parent_id.to_s}
+      }
 
       url :delete_url, ->(instance){
         manager_business_category_path(instance)
