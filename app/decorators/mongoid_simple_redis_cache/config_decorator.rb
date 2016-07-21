@@ -28,8 +28,8 @@ MongoidSimpleRedisCache.config do
     rules do
 
       after_save EnterprisePositionLevel::Post do |post|
-        if self.changed.include?("business_category_ids")
-          all_ids = self.business_categories.map do |bc|
+        if post.changed.include?("business_category_ids")
+          all_ids = post.business_categories.map do |bc|
             ids = bc.parent_ids.map{|id|id.to_s}
             ids.push bc.id.to_s
             ids
@@ -40,13 +40,14 @@ MongoidSimpleRedisCache.config do
           bc_info_array.each do |info|
             id = info["_id"].to_s
             parent_id = info["parent_id"].nil? ? nil : info["parent_id"].to_s
+            next if parent_id.nil?
             key_parent_id_value_ids_hash[parent_id] ||= []
             key_parent_id_value_ids_hash[parent_id].push id
           end
 
           key_parent_id_value_ids_hash.each do |parent_id, ids|
             custom_refresh_cache(
-              self,
+              post,
               {class: Bank::BusinessCategory, id: parent_id},
               ids)
           end

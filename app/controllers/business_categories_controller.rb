@@ -37,8 +37,6 @@ class BusinessCategoriesController < ApplicationController
     @page_name = "post_business_categories"
 
     post = EnterprisePositionLevel::Post.all[0]
-    p "~~~~~~~~~~~~~"
-    p post.name
 
     if params[:pid].blank?
       parents_data = []
