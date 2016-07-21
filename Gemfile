@@ -66,7 +66,7 @@ gem 'file-part-upload',
 # -----金融学院相关
 gem 'kc_courses',
     github: 'mindpin/kc_courses',
-    ref: "a5081a8"
+    ref: "139166f"
 
 gem 'bank',
     github: "mindpin/bank",

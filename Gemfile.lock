@@ -44,10 +44,11 @@ GIT
 
 GIT
   remote: git://github.com/mindpin/kc_courses.git
-  revision: a5081a88497e3f303f478144226958a4f2fca46b
-  ref: a5081a8
+  revision: 139166fc798581045024bb3de75afdebd74b0589
+  ref: 139166f
   specs:
     kc_courses (0.1.0)
+      enumerize (= 1.1.1)
       mongoid-tree
       ruby-pinyin
 
@@ -197,7 +198,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.10.0)
-    libv8 (3.16.14.13)
+    libv8 (3.16.14.15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
