@@ -7,8 +7,8 @@ GIT
 
 GIT
   remote: git://github.com/mindpin/bank.git
-  revision: aba3072ecdb4d562e151068f50c27a679b98a817
-  ref: aba3072
+  revision: b7495518bc02f2672b1ce521540395dc0deeffe3
+  ref: b749551
   specs:
     bank (0.1.0)
       mongoid-tree (~> 2.0)
@@ -50,6 +50,14 @@ GIT
     kc_courses (0.1.0)
       mongoid-tree
       ruby-pinyin
+
+GIT
+  remote: git://github.com/mindpin/mongoid-simple-redis-cache.git
+  revision: 81ea34e5cb18aba43b60142ae4db2bc2a29ddebd
+  ref: 81ea34e
+  specs:
+    mongoid-simple-redis-cache (0.1.0)
+      redis (~> 3.2)
 
 GEM
   remote: https://ruby.taobao.org/
@@ -401,6 +409,7 @@ DEPENDENCIES
   kc_courses!
   mina (= 0.3.7)
   mongoid (~> 4.0.0)
+  mongoid-simple-redis-cache!
   non-stupid-digest-assets
   pry
   pry-byebug

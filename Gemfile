@@ -70,7 +70,7 @@ gem 'kc_courses',
 
 gem 'bank',
     github: "mindpin/bank",
-    ref: "aba3072"
+    ref: "b749551"
 
 gem 'enterprise_position_level',
     github: "mindpin/enterprise_position_level",
@@ -79,6 +79,10 @@ gem 'enterprise_position_level',
 gem 'question_mod',
     github: "fushang318/question_mod",
     ref: "dc5c9ea"
+
+gem 'mongoid-simple-redis-cache',
+    github: "mindpin/mongoid-simple-redis-cache",
+    ref: "81ea34e"
 
 # ----------------------------------
 

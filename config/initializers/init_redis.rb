@@ -1,2 +1,4 @@
-config = YAML.load(IO.read(Rails.root.join("config/redis.yml")))[Rails.env]
-REDIS_INSTANCE = Redis.new(:host => config["host"], :port => config["port"], :db => config["db"])
+REDIS_INSTANCE = Redis.new(
+  :host => ENV['redis_host'],
+  :port => ENV['redis_port'],
+  :db => ENV['redis_db'])
