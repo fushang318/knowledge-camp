@@ -1,16 +1,7 @@
 Bank::BusinessCategory.class_eval do
-  has_and_belongs_to_many :wares, class_name: "KcCourses::Ware", inverse_of: :business_categories
-
-  #def set_read_percent_by_user(user, read_percent)
-    #raise "传入错误的百分比" if read_percent > 100 or read_percent < 0
-    #return true if read_percent_of_user(user) >= read_percent
-    #ware_reading = self.ware_readings.where(:creator_id => user.id.to_s).first
-    #if ware_reading.blank?
-      #self.ware_readings.create(:creator => user, :read_percent => read_percent)
-    #else
-      #ware_reading.update(:read_percent => read_percent)
-    #end
-  #end
+  def wares
+    KcCourses::Ware.where(:business_category_ids.in => [self.id.to_s])
+  end
 
   # user 已经学习了该业务类别下所有课件的百分比
   def read_percent_of_user(user)
