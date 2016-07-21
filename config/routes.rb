@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     get :my, on: :collection
   end
 
+  resources :simple_video_wares
+
   scope :path => "/manager", module: 'manager', as: :manager do
     get "dashboard" => "dashboard#index"
 
