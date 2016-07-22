@@ -1,12 +1,12 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+
   field :name, type: String
-  
+
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
@@ -24,7 +24,7 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
-  
+
   validates :name, presence: true
   validates :name, length: {in: 2..20}, :if => Proc.new {|user|
     user.name.present?
@@ -43,4 +43,8 @@ class User
       :avatar => self.avatar.url
     }
   end
+
+  # 角色
+  extend Enumerize
+  enumerize :role, in: [:teller, :supervisor, :admin], default: :teller, scope: true
 end

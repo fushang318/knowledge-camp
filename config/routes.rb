@@ -51,6 +51,9 @@ Rails.application.routes.draw do
   scope :path => "/manager", module: 'manager', as: :manager do
     get "dashboard" => "dashboard#index"
 
+    # 督导员维护
+    resources :supervisors
+
     resources :courses, shallow: true do
       get :organize, on: :member
       resources :chapters, shallow: true do

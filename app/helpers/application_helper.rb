@@ -2,6 +2,16 @@ module ApplicationHelper
   def manager_sidebar_scenes
     [
       {
+        name: '用户管理',
+        funcs: [
+          {
+            name: '督导员管理',
+            url: manager_supervisors_path,
+            icon: 'user'
+          }
+        ]
+      },
+      {
         name: '课件管理',
         funcs: [
           {
