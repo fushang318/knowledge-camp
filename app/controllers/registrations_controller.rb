@@ -7,13 +7,33 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     @page_name = 'auth_bank_sign_up'
+    posts = EnterprisePositionLevel::Post.all.map do |post|
+      DataFormer.new(post).data
+    end
 
     @component_data = {
+      posts: posts,
+      get_activate_code_url:   e_phone_number_check_mod.messages_path,
+      valid_activate_code_url: e_phone_number_check_mod.check_validation_messages_path,
+      check_phone_number_url:  api_check_phone_number_path,
       sign_in_url: sign_in_path,
       sign_up_url: sign_up_path,
       submit_url: api_sign_up_path
     }
     render "/mockup/page", layout: 'mockup_bank_auth'
+  end
+
+  def check_phone_number
+    user = User.where(phone_number: params[:phone_number]).first
+    if user.blank?
+      render json: {text: '手机号码可以使用', status: 200}, status: 200
+    else
+      render json: {text: '手机号码已经被使用了', status: 422}, status: 422
+    end
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :phone_number, :post_id, :password) }
   end
 
 end

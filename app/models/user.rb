@@ -47,4 +47,7 @@ class User
   # 角色
   extend Enumerize
   enumerize :role, in: [:teller, :supervisor, :admin], default: :teller, scope: true
+  field :phone_number, type: String
+  validates :phone_number, uniqueness: true
+  belongs_to :post, class_name: 'EnterprisePositionLevel::Post'
 end

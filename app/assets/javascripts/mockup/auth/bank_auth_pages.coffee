@@ -30,7 +30,7 @@
               <div className='head'>
                 <i className='icon sign in' />
                 <span className='sign-in link'>用户登录</span>
-                <a className="ui basic button" href={@props.data.sign_up_url}>
+                <a className="sign-up ui basic button" href={@props.data.sign_up_url}>
                   注册
                 </a>
               </div>
@@ -44,6 +44,13 @@
 
 @AuthBankSignUpPage = React.createClass
   render: ->
+    sign_up_form_data =
+      valid_activate_code_url: @props.data.valid_activate_code_url
+      get_activate_code_url:   @props.data.get_activate_code_url
+      check_phone_number_url:  @props.data.check_phone_number_url
+      submit_url:              @props.data.submit_url
+      posts:                   @props.data.posts
+
     <div className='auth-bank-sign-up-page'>
 
       <div className='ui container'>
@@ -67,7 +74,7 @@
                   登录
                 </a>
               </div>
-              <AuthBankSignUpPage.SignUpForm get_activate_code_url={@props.data.get_activate_code_url} submit_url={@props.data.submit_url} />
+              <AuthBankSignUpPage.SignUpForm data={sign_up_form_data} />
             </div>
           </div>
         </div>
@@ -83,23 +90,17 @@
       render: ->
         if @state.step == 1
           data =
-            get_activate_code_url:   @props.get_activate_code_url
-            valid_activate_code_url: @props.valid_activate_code_url
+            get_activate_code_url:   @props.data.get_activate_code_url
+            valid_activate_code_url: @props.data.valid_activate_code_url
+            check_phone_number_url:  @props.data.check_phone_number_url
             to_step_2:               @to_step_2
+
           <AuthBankSignUpPage.SignUpForm.Step1Form data={data} />
         else if @state.step == 2
           data =
+            submit_url: @props.data.submit_url
             phone_number: @state.phone_number
-            posts: [
-              {
-                id: 1111,
-                name: "对公"
-              },
-              {
-                id: 222,
-                name: "对私"
-              }
-            ]
+            posts: @props.data.posts
           <AuthBankSignUpPage.SignUpForm.Step2Form data={data} />
 
       to_step_2: (phone_number)->
@@ -114,6 +115,7 @@
             activate_code: ""
             activate_code_count_down: 0
             activate_code_error: false
+            phone_number_is_used: false
 
           render: ->
             next_button_disable = if @input_is_valid() then "" else "disabled"
@@ -122,7 +124,7 @@
               <div className='field phone'>
                 <div className='ui left icon input'>
                   <i className='icon phone' />
-                  <input type='text' placeholder='手机号' value={@state.phone_number} onChange={@on_change('phone_number')} />
+                  <input type='text' placeholder='手机号' value={@state.phone_number} onChange={@phone_number_change()} />
                 </div>
               </div>
 
@@ -144,8 +146,12 @@
               <div className="field">
                 <button className="ui green button #{next_button_disable}" onClick={@do_submit}>下一步</button>
                 {
-                  if @state.activate_code_error
-                    <div className="activate-code-error">
+                  if @state.phone_number_is_used
+                    <div className="error">
+                      手机号已被使用
+                    </div>
+                  else if @state.activate_code_error
+                    <div className="error">
                       激活码错误
                     </div>
                 }
@@ -154,7 +160,7 @@
             </div>
 
           phone_number_is_valid: ->
-            /^[0-9]{11}$/.test @state.phone_number
+            /^[0-9]{11}$/.test(@state.phone_number) && !@state.phone_number_is_used
 
           input_is_valid: ->
             @phone_number_is_valid() && @state.activate_code.length != 0
@@ -165,7 +171,8 @@
               url: @props.data.get_activate_code_url
               type: "POST"
               data:
-                phone_number: @state.phone_number
+                message:
+                  phone_num: @state.phone_number
               dataType: "json"
 
           activate_code_count_down_loop: ->
@@ -184,6 +191,25 @@
             @setState
               activate_code_error: true
 
+          phone_number_change: ()->
+            (evt)=>
+              phone_number = evt.target.value
+              @setState phone_number: phone_number
+              if /^[0-9]{11}$/.test phone_number
+                jQuery.ajax
+                  url: @props.data.check_phone_number_url
+                  type: "GET"
+                  data:
+                    phone_number: phone_number
+                  dataType: "json"
+                  statusCode:
+                    422: (res)=>
+                      @setState
+                        phone_number_is_used: true
+                  success: (res)=>
+                      @setState
+                        phone_number_is_used: false
+
           on_change: (input_name)->
             (evt)=>
               @setState "#{input_name}": evt.target.value
@@ -197,14 +223,14 @@
               url: @props.data.valid_activate_code_url
               type: "POST"
               data:
-                phone_number: @state.phone_number
-                activate_code: @state.activate_code
+                phone_num: @state.phone_number
+                valid_code: @state.activate_code
               dataType: "json"
-            success: (res)=>
-              @props.data.to_step_2(@state.phone_number)
-            statusCode:
-              422: (res)=>
-                @activate_code_error()
+              success: (res)=>
+                if res.validation_result == "correct"
+                  @props.data.to_step_2(@state.phone_number)
+                else
+                  @activate_code_error()
 
         Step2Form: React.createClass
           componentDidMount: ->
@@ -252,7 +278,7 @@
                 if @state.error.length != 0
                   <div className="ui yellow message small">
                     <i className="icon info circle"></i>
-                    {"邮箱不合法"}
+                    {@state.error}
                   </div>
               }
               <button className="ui green button #{sign_up_button_disable}" onClick={@do_submit}>确定注册</button>
@@ -273,14 +299,19 @@
               url: @props.data.submit_url
               type: "POST"
               data:
-                phone_number: @props.data.phone_number
-                email: @state.email
-                name: @state.name
-                password: @state.password
-                post_id: @state.post_id
+                user:
+                  phone_number: @props.data.phone_number
+                  email: @state.email
+                  name: @state.name
+                  password: @state.password
+                  post_id: @state.post_id
               dataType: "json"
-            success: (res)=>
-              @props.data.to_step_2()
-            statusCode:
-              422: (res)=>
-                @activate_code_error()
+              success: (res)=>
+                location.reload()
+              statusCode:
+                422: (res)=>
+                  errors = []
+                  for key, value of res.responseJSON.errors
+                    for i in value
+                      errors.push i
+                  @setState error: errors[0]

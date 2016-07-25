@@ -6,6 +6,13 @@ GIT
     question_mod (0.0.1)
 
 GIT
+  remote: git://github.com/kc-train/phone_number_check_mod.git
+  revision: 8cbbe61793d28b2fa43eb3d623774612c7082d6d
+  tag: 0.0.1
+  specs:
+    phone_number_check_mod (0.0.1)
+
+GIT
   remote: git://github.com/mindpin/bank.git
   revision: b7495518bc02f2672b1ce521540395dc0deeffe3
   ref: b749551
@@ -412,6 +419,7 @@ DEPENDENCIES
   mongoid (~> 4.0.0)
   mongoid-simple-redis-cache!
   non-stupid-digest-assets
+  phone_number_check_mod!
   pry
   pry-byebug
   pry-rails

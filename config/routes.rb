@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   mount FilePartUpload::Engine => "/e/file_part_upload", :as => :e_file_part_upload
   # 课程功能
   KcCourses::Routing.mount '/e/kc_courses', as: :e_courses
+  # 短信验证
+  mount PhoneNumberCheckMod::Engine => '/e/phone_number_check_mod', :as => :e_phone_number_check_mod
 
   # --------------------
   # kc mobile 2016
@@ -42,6 +44,7 @@ Rails.application.routes.draw do
 
     get    "/sign_up"      => "registrations#new"
     post   "/api/sign_up"  => "registrations#create"
+    get    "/api/check_phone_number" => "registrations#check_phone_number"
   end
 
   resources :business_categories do

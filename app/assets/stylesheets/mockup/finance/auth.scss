@@ -42,6 +42,10 @@ body.bank-auth {
     .head {
       font-size: 16px;
       margin-bottom: 2rem;
+      line-height: 36px;
+      .sign-up{
+        float: right;
+      }
     }
   }
 
@@ -69,10 +73,9 @@ body.bank-auth {
 
     .ui.container {
       margin-top: 10rem;
-      width: 70rem;
+      width: 60rem;
 
       .sign-up-form.step1{
-        margin-left: 20px;
         .field.phone{
           width: 350px;
         }
@@ -89,7 +92,7 @@ body.bank-auth {
           }
         }
 
-        .field .activate-code-error{
+        .field .error{
           display: inline-block;
           line-height: 35px;
           color: #ff0000;
