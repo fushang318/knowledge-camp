@@ -6,13 +6,14 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def new
-    @page_name = 'auth_sign_up'
+    @page_name = 'auth_bank_sign_up'
+
     @component_data = {
       sign_in_url: sign_in_path,
       sign_up_url: sign_up_path,
       submit_url: api_sign_up_path
     }
-    render "/mockup/page"
+    render "/mockup/page", layout: 'mockup_bank_auth'
   end
 
 end
