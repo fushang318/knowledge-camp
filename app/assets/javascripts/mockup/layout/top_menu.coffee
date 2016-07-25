@@ -62,6 +62,7 @@
                 </a>
                 <a key='name' className='item' href={user.user_dashboard_url}>{user.name}</a>
                 <a key='backend' className='item' href='/manager/dashboard'>访问后台</a>
+                <a key='setting' className='item' href='/users/edit'>用户设置</a>
                 <a key='sign-out' className='item' onClick={@do_sign_out}>登出</a>
               ]
           }

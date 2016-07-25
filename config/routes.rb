@@ -45,6 +45,9 @@ Rails.application.routes.draw do
     get    "/sign_up"      => "registrations#new"
     post   "/api/sign_up"  => "registrations#create"
     get    "/api/check_phone_number" => "registrations#check_phone_number"
+
+    get "/users/edit" => "registrations#edit"
+    put "/users"      => "registrations#update"
   end
 
   resources :business_categories do

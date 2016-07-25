@@ -23,6 +23,34 @@ class RegistrationsController < Devise::RegistrationsController
     render "/mockup/page", layout: 'mockup_bank_auth'
   end
 
+  def edit
+    @page_name = 'user_edit'
+    @component_data = {
+      user: DataFormer.new(current_user).data,
+      update_url: "/users"
+    }
+  end
+
+  def update
+    user_params = params.require(:users).permit(:name, :password, :current_password)
+    user_params.delete :password if user_params[:password].blank?
+
+    if user_params[:current_password].blank?
+      result = current_user.update_without_password(user_params)
+    else
+      result = current_user.update_with_password(user_params)
+    end
+
+    if result
+      data = DataFormer.new(current_user).data.merge jump_url: "/"
+      sign_in current_user, :bypass => true
+      render json: data
+    else
+      data = current_user.errors.messages
+      render json: data, :status => 422
+    end
+  end
+
   def check_phone_number
     user = User.where(phone_number: params[:phone_number]).first
     if user.blank?
