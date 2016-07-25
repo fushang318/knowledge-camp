@@ -44,6 +44,20 @@ class User
     }
   end
 
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if email_or_phone_number = conditions.delete(:email).downcase
+      where(conditions).where(
+        '$or' => [
+          {email: email_or_phone_number},
+          {phone_number: email_or_phone_number}
+        ]
+      ).first
+    else
+      where(conditions).first
+    end
+  end
+
   # 角色
   extend Enumerize
   enumerize :role, in: [:teller, :supervisor, :admin], default: :teller, scope: true

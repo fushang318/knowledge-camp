@@ -10,7 +10,7 @@
       <div className='field'>
         <div className='ui left icon input'>
           <i className='icon mail' />
-          <input type='text' placeholder='邮箱' value={@state.email} onChange={@on_change('email')} onKeyPress={@enter_submit} />
+          <input type='text' placeholder='邮箱/手机号' value={@state.email} onChange={@on_change('email')} onKeyPress={@enter_submit} />
         </div>
       </div>
 
@@ -32,7 +32,7 @@
       {
         if @state.success
           <div className="ui green message small">
-            <i className='icon checkmark' /> 
+            <i className='icon checkmark' />
             <span>登录成功</span>
           </div>
       }
@@ -81,12 +81,12 @@
         else
           location.reload()
 
-      statusCode: 
+      statusCode:
         401: (res)=>
           @setState
             error: res.responseJSON?.error
             success: null
-        
+
 @SignUpForm = React.createClass
   getInitialState: ->
     name: ''
