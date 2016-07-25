@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     post :read, on: :member
   end
   resources :simple_video_wares
+  resources :simple_document_wares
 
   scope :path => "/manager", module: 'manager', as: :manager do
     get "dashboard" => "dashboard#index"

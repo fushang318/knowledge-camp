@@ -77,6 +77,12 @@ module WareFormer
           }
         end
       }
+      field :document_urls, ->(instance) {
+        instance.file_entity ?
+          instance.file_entity.transcode_urls("jpg") :
+          []
+      }
+
       logic :learned, ->(instance, user) {
         percent = instance.read_percent_of_user(user)
         learned = 'done' if percent == 100
