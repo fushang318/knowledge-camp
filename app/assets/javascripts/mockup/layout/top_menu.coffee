@@ -74,7 +74,7 @@
       url: @props.data.sign_out_url
       type: 'delete'
     .done ->
-      location.reload()
+      location.href = "/"
 
   statics:
     NestedItems: React.createClass
