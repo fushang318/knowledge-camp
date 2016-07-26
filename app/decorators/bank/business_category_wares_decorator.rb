@@ -45,6 +45,10 @@ module Bank
       end
     end
 
+    def all_wares_db
+      wares_db(KcCourses::Ware)
+    end
+
     def wares_db(ware_type_class)
       if self.leaf?
         return ware_type_class.where(:business_category_ids.in => [self.id.to_s]).to_a

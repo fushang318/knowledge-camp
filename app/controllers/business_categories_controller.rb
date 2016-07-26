@@ -9,12 +9,26 @@ class BusinessCategoriesController < ApplicationController
       data = Bank::BusinessCategory.roots.map {|x|
         DataFormer.new(x).logic(:is_leaf).data
       }
+      wares = []
     else
       parent_bc = Bank::BusinessCategory.find params[:pid]
-      data = parent_bc.children.map {|x|
-        DataFormer.new(x).logic(:is_leaf).data
-      }
-      parent_ids = parent_bc.parent_ids + [parent_bc.id]
+
+      if parent_bc.leaf?
+        data = parent_bc.siblings_and_self.map{ |x|
+          if x.id.to_s == params[:pid]
+            DataFormer.new(x).logic(:is_leaf).data.merge(current: true)
+          else
+            DataFormer.new(x).logic(:is_leaf).data
+          end
+        }
+        parent_ids = parent_bc.parent_ids
+      else
+        data = parent_bc.children.map {|x|
+          DataFormer.new(x).logic(:is_leaf).data
+        }
+        parent_ids = parent_bc.parent_ids + [parent_bc.id]
+      end
+
       parents_data = parent_ids.map {|id|
         c = Bank::BusinessCategory.find id
 
@@ -25,11 +39,18 @@ class BusinessCategoriesController < ApplicationController
           }
         }
       }
+
+      wares = parent_bc.all_wares_db.map do |ware|
+        DataFormer.new(ware)
+          .url(:show_url)
+          .data
+      end
     end
 
     @component_data = {
       parents_data: parents_data,
-      categories: data
+      categories: data,
+      wares: wares
     }
   end
 
