@@ -104,4 +104,19 @@ module ApplicationHelper
       },
     ]
   end
+
+  def supervisor_sidebar_scenes
+    [
+     {
+      name: '柜员管理',
+      funcs: [
+        {
+          name: '柜员管理',
+          url: manager_supervisor_tellers_path,
+          icon: 'user'
+        }
+      ]
+     },
+    ]
+  end
 end

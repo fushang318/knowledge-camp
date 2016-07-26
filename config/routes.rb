@@ -67,6 +67,8 @@ Rails.application.routes.draw do
     resources :supervisors
     # 柜员维护
     resources :tellers
+    # 督导员的柜员维护
+    resources :supervisor_tellers
 
     resources :courses, shallow: true do
       get :organize, on: :member
