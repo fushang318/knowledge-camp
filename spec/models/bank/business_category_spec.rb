@@ -10,7 +10,7 @@ RSpec.describe Bank::BusinessCategory, type: :model do
     @business_category = create(:business_category)
     @ware = create(:ware)
     @user = create(:user)
-    @business_category.wares << @ware
+    @ware.business_categories << @business_category
 
     expect(@business_category.has_read_by_user?(@user)).to be false
 
@@ -62,17 +62,17 @@ RSpec.describe Bank::BusinessCategory, type: :model do
           @c4.children << @c6
           @c4.children << @c7
 
-          @c2.wares << @w1
+          @w1.business_categories << @c2
 
-          @c3.wares << @w2
-          @c3.wares << @w3
+          @w2.business_categories << @c3
+          @w3.business_categories << @c3
 
-          @c6.wares << @w4
-          @c6.wares << @w5
+          @w4.business_categories << @c6
+          @w5.business_categories << @c6
 
-          @c7.wares << @w6
-          @c7.wares << @w7
-          @c7.wares << @w8
+          @w6.business_categories << @c7
+          @w7.business_categories << @c7
+          @w8.business_categories << @c7
         end
 
         it "无学习记录返回0" do
