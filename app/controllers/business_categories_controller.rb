@@ -46,12 +46,26 @@ class BusinessCategoriesController < ApplicationController
           .logic(:read_percent_of_user, current_user)
           .data
       }
+      wares = []
     else
       parent_bc = Bank::BusinessCategory.find params[:pid]
-      data = post.children_business_categories(parent_bc).map {|x|
-        DataFormer.new(x).logic(:is_leaf).logic(:read_percent_of_user, current_user).data
-      }
-      parent_ids = parent_bc.parent_ids + [parent_bc.id]
+      if parent_bc.leaf?
+        data = post.siblings_and_self_business_categories(parent_bc).map{ |x|
+          if x.id.to_s == params[:pid]
+            DataFormer.new(x).logic(:is_leaf).logic(:read_percent_of_user, current_user).data.merge(current: true)
+          else
+            DataFormer.new(x).logic(:is_leaf).logic(:read_percent_of_user, current_user).data
+          end
+
+        }
+        parent_ids = parent_bc.parent_ids
+      else
+        data = post.children_business_categories(parent_bc).map {|x|
+          DataFormer.new(x).logic(:is_leaf).logic(:read_percent_of_user, current_user).data
+        }
+        parent_ids = parent_bc.parent_ids + [parent_bc.id]
+      end
+
       parents_data = parent_ids.map {|id|
         c = Bank::BusinessCategory.find id
         {
@@ -61,10 +75,20 @@ class BusinessCategoriesController < ApplicationController
           }
         }
       }
+
+      wares = parent_bc.all_wares_of_post_db(post).map do |ware|
+        DataFormer.new(ware)
+          .url(:show_url)
+          .logic(:read_percent_of_user, current_user)
+          .data
+      end
     end
+
+
     @component_data = {
       parents_data: parents_data,
-      categories: data
+      categories: data,
+      wares: wares
     }
   end
 

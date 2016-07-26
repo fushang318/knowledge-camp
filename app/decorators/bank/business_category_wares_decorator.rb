@@ -14,6 +14,10 @@ module Bank
       wares_db(Finance::TellerWare)
     end
 
+    def all_wares_of_post_db(post)
+      wares_of_post_db(post, KcCourses::Ware)
+    end
+
     def simple_video_wares_of_post_db(post)
       wares_of_post_db(post, KcCourses::SimpleVideoWare)
     end

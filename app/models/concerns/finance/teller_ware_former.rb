@@ -19,6 +19,7 @@ module Finance::TellerWareFormer
       field :gtd_status
       field :editor_memo
       field :desc
+      field :kind, ->(instance) { "teller" }
 
       logic :actions, ->(instance) {
         instance.actions
@@ -41,6 +42,10 @@ module Finance::TellerWareFormer
               .logic(:business_kind_str)
               .data
           }
+      }
+
+      logic :read_percent_of_user, ->(instance, user){
+        instance.read_percent_of_user(user)
       }
 
       url :show_url, ->(instance) {
