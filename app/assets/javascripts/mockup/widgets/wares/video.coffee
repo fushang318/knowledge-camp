@@ -33,7 +33,7 @@
     {#<Ware.Video.CKPlayerM3U8 data={@props.data} />}
     {#<Ware.Video.CKPlayerH5MP4 data={@props.data} />}
     {#<Ware.Video.CKPlayer data={@props.data} />}
-    <Ware.Video.MediaElementMP4 data={@props.data} />
+    <Ware.Video.MediaElementMP4 data={@props.data} timeupdate={@props.timeupdate} ended={@props.ended} />
 
   statics:
     # 只能播放 MP4
@@ -62,6 +62,15 @@
           # pluginWidth: '100%'
           # pluginHeight: '100%'
           # 试图修正尺寸 bug，然而这几个参数没什么用
+          #
+          # rate in milliseconds for Flash and Silverlight to fire the timeupdate event
+          # larger number is less accurate, but less strain on plugin->JavaScript bridge
+          # timerRate: 250
+          # method that fires when the Flash or Silverlight object is ready
+          success: (mediaElement, domObject) =>
+            # add event listener
+            mediaElement.addEventListener 'ended', @props.ended(mediaElement, domObject), true if @props.ended
+            mediaElement.addEventListener 'timeupdate', @props.timeupdate(mediaElement, domObject), false if @props.timeupdate
         }
 
         jQuery(document).on 'ware:toggle-changed', @player_resize
