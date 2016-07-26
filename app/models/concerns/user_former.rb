@@ -18,6 +18,10 @@ module UserFormer
         }
       }
 
+      logic :phone_number, ->(instance){
+        instance.phone_number
+      }
+
       url :user_dashboard_url, ->(instance) {
         user_dashboard_path
       }

@@ -8,6 +8,11 @@ module ApplicationHelper
             name: '督导员管理',
             url: manager_supervisors_path,
             icon: 'user'
+          },
+          {
+            name: '柜员管理',
+            url: manager_tellers_path,
+            icon: 'user'
           }
         ]
       },
