@@ -194,6 +194,12 @@
         <input type='text' value={@props._value} onChange={@props._change} />
       </DataForm.Form.Field>
 
+  PasswordInputField: React.createClass
+    render: ->
+      <DataForm.Form.Field {...@props}>
+        <input type='password' value={@props._value} onChange={@props._change} />
+      </DataForm.Form.Field>
+
   TextAreaField: React.createClass
     render: ->
       rows = @props.rows || 5

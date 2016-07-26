@@ -80,6 +80,9 @@ class Manager::EnterprisePostsController < Manager::ApplicationController
   end
 
   def update_business_categories_post_params
+    if params[:post].blank?
+      return {business_category_ids: []}
+    end
     params.require(:post).permit(business_category_ids: [])
   end
 end

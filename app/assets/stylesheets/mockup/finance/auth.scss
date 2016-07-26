@@ -42,6 +42,73 @@ body.bank-auth {
     .head {
       font-size: 16px;
       margin-bottom: 2rem;
+      line-height: 36px;
+      .sign-up{
+        float: right;
+      }
+    }
+  }
+
+  .auth-bank-sign-up-page {
+    .product-logo {
+      .logo-img {
+        height: 3.5rem;
+        background-image: url(http://i.teamkn.com/i/p9JthlkG.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+      }
+    }
+
+    .customer-logo {
+      height: 190px;
+      margin-top: 2rem;
+
+      // background-image: url(http://i.teamkn.com/i/SZ1qDe5u.png);
+      background-image: url(http://i.teamkn.com/i/vKOjyhgb.png);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+    }
+
+    .ui.container {
+      margin-top: 10rem;
+      width: 60rem;
+
+      .sign-up-form.step1{
+        .field.phone{
+          width: 350px;
+        }
+
+        .inline.fields{
+          .field.get-activate-code{
+            padding-right: 15px;
+            button{
+              width: 150px;
+            }
+          }
+          .field.input-activate-code input{
+            width: 185px;
+          }
+        }
+
+        .field .error{
+          display: inline-block;
+          line-height: 35px;
+          color: #ff0000;
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    .head {
+      font-size: 16px;
+      margin-bottom: 2rem;
+      line-height: 36px;
+
+      .sign-in{
+        float: right;
+      }
     }
   }
 }
@@ -50,4 +117,12 @@ body.bank-auth.manager-auth {
   background-color: #CCF1E3;
   // background-image: url(http://i.teamkn.com/i/NmwQFctm.jpg);
   background-image: none;
+}
+
+.user-edit-page{
+  .form{
+    padding-top: 2rem;
+    width: 800px;
+    margin: auto;
+  }
 }

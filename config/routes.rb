@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   mount FilePartUpload::Engine => "/e/file_part_upload", :as => :e_file_part_upload
   # 课程功能
   KcCourses::Routing.mount '/e/kc_courses', as: :e_courses
+  # 短信验证
+  mount PhoneNumberCheckMod::Engine => '/e/phone_number_check_mod', :as => :e_phone_number_check_mod
 
   # --------------------
   # kc mobile 2016
@@ -42,6 +44,10 @@ Rails.application.routes.draw do
 
     get    "/sign_up"      => "registrations#new"
     post   "/api/sign_up"  => "registrations#create"
+    get    "/api/check_phone_number" => "registrations#check_phone_number"
+
+    get "/users/edit" => "registrations#edit"
+    put "/users"      => "registrations#update"
   end
 
   resources :business_categories do
@@ -56,6 +62,9 @@ Rails.application.routes.draw do
 
   scope :path => "/manager", module: 'manager', as: :manager do
     get "dashboard" => "dashboard#index"
+
+    # 督导员维护
+    resources :supervisors
 
     resources :courses, shallow: true do
       get :organize, on: :member

@@ -22,6 +22,10 @@ module UserFormer
         user_dashboard_path
       }
 
+      url :manager_supervisors_edit_url, ->(instance) {
+        edit_manager_supervisor_path(instance)
+      }
+
     end
 
   end

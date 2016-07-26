@@ -6,9 +6,16 @@ GIT
     question_mod (0.0.1)
 
 GIT
+  remote: git://github.com/kc-train/phone_number_check_mod.git
+  revision: 8cbbe61793d28b2fa43eb3d623774612c7082d6d
+  tag: 0.0.1
+  specs:
+    phone_number_check_mod (0.0.1)
+
+GIT
   remote: git://github.com/mindpin/bank.git
-  revision: aba3072ecdb4d562e151068f50c27a679b98a817
-  ref: aba3072
+  revision: b7495518bc02f2672b1ce521540395dc0deeffe3
+  ref: b749551
   specs:
     bank (0.1.0)
       mongoid-tree (~> 2.0)
@@ -51,6 +58,14 @@ GIT
       enumerize (= 1.1.1)
       mongoid-tree
       ruby-pinyin
+
+GIT
+  remote: git://github.com/mindpin/mongoid-simple-redis-cache.git
+  revision: f5fd2df221db9fa51219097edc609f024fd364ed
+  ref: f5fd2df
+  specs:
+    mongoid-simple-redis-cache (0.1.0)
+      redis (~> 3.2)
 
 GEM
   remote: https://ruby.taobao.org/
@@ -402,7 +417,9 @@ DEPENDENCIES
   kc_courses!
   mina (= 0.3.7)
   mongoid (~> 4.0.0)
+  mongoid-simple-redis-cache!
   non-stupid-digest-assets
+  phone_number_check_mod!
   pry
   pry-byebug
   pry-rails
