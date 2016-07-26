@@ -1,3 +1,5 @@
+# 偏移量，预防有不能达到100%的情况
+FIX_HEIGHT = 50
 @SimpleDocumentWareShowPage = React.createClass
   render: ->
     <div className='simple-document-ware-show-page'>
@@ -31,8 +33,21 @@
           console.log 'ended'
           @read(100)
 
+      getInitialState: ->
+        percent: 0
+
       componentDidMount: ->
-        jQuery(@refs.div_ware.getDOMNode()).css "height", jQuery(window).height()
+        $div_ware = jQuery @refs.div_ware.getDOMNode()
+        $div_ware_page = $div_ware.parent()
+        @window_height = jQuery(window).height()
+        @scrollHeight = $div_ware_page.get(0).scrollHeight
+        $div_ware.css "height", @window_height
+        $div_ware_page.scroll (e) =>
+          percent = Math.floor(100 * (e.target.scrollTop + @window_height + FIX_HEIGHT) / e.target.scrollHeight)
+          if percent > @state.percent
+            @read(percent)
+            @setState
+              percent: percent
 
       render: ->
         @percent = 0
