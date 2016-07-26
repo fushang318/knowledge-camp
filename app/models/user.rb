@@ -62,6 +62,11 @@ class User
   extend Enumerize
   enumerize :role, in: [:teller, :supervisor, :admin], default: :teller, scope: true
   field :phone_number, type: String
-  validates :phone_number, uniqueness: true
+  validates :phone_number, uniqueness: true, if: :teller?
+  validates :phone_number, presence: true, if: :teller?
   belongs_to :post, class_name: 'EnterprisePositionLevel::Post'
+
+  def teller?
+    role == "teller"
+  end
 end
