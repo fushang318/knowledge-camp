@@ -27,6 +27,10 @@ module BusinessCategoryFormer
         instance.children.count == 0
       }
 
+      logic :read_percent_of_user, ->(instance, user) {
+        instance.read_percent_of_user(user) || 0
+      }
+
     end
 
   end

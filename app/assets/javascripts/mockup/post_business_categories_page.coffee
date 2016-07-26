@@ -31,51 +31,16 @@
                   if bc.is_leaf
                     <a href="/business_categories/#{bc.id}">
                       <span><i className='icon circle' /> {bc.name}({bc.number})</span>
+                      <ProgressBar percent={bc.read_percent_of_user} />
                     </a>
                   else
                     <a href="/business_categories/my?pid=#{bc.id}">
                       <span>{bc.name}</span>
+                      <ProgressBar percent={bc.read_percent_of_user} />
                     </a>
                 }
               </div>
           }
-          </div>
-        </div>
-      </div>
-    </div>
-
-@FrontBusinessCategoryShowPage = React.createClass
-  render: ->
-    <div className='front-business-category-show-page'>
-      <div className='ui container'>
-        <div className='ui segment'>
-          {
-            for parent in @props.data.parents_data
-              <span key={parent.id}>
-                <a href="/business_categories?pid=#{parent.id}">{parent.name}</a>
-                <span> > </span>
-              </span>
-          }
-          <span>{@props.data.category.name}({@props.data.category.number})</span>
-
-          <div style={marginTop: '3rem'}>
-            <h4>视频演示</h4>
-            {
-              for video in @props.data.videos
-                <div key={video.id}>
-                  <a href={video.url} target='_blank'><i className='icon video' /> {video.original}</a>
-                </div>
-            }
-          </div>
-
-          <div style={marginTop: '3rem'}>
-            <h4>课件演示</h4>
-            <div className='wares ui cards'>
-            {
-              for ware in @props.data.teller_wares
-                <FinanceTellerWareCard key={ware.id} data={ware} />
-            }
-            </div>
           </div>
         </div>
       </div>

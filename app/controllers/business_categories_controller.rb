@@ -41,12 +41,15 @@ class BusinessCategoriesController < ApplicationController
     if params[:pid].blank?
       parents_data = []
       data = post.root_business_categories.map {|x|
-        DataFormer.new(x).logic(:is_leaf).data
+        DataFormer.new(x)
+          .logic(:is_leaf)
+          .logic(:read_percent_of_user, current_user)
+          .data
       }
     else
       parent_bc = Bank::BusinessCategory.find params[:pid]
       data = post.children_business_categories(parent_bc).map {|x|
-        DataFormer.new(x).logic(:is_leaf).data
+        DataFormer.new(x).logic(:is_leaf).logic(:read_percent_of_user, current_user).data
       }
       parent_ids = parent_bc.parent_ids + [parent_bc.id]
       parents_data = parent_ids.map {|id|
