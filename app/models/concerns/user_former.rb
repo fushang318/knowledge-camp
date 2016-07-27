@@ -18,6 +18,10 @@ module UserFormer
         }
       }
 
+      logic :role, ->(instance) {
+        instance.role
+      }
+
       logic :phone_number, ->(instance){
         instance.phone_number
       }

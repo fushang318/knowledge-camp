@@ -9,8 +9,8 @@
             <a style={display: 'none'} key='avatar' className='item avatar' href='javascript:;'>
               <img src={user.avatar?.url} />
             </a>
-            <a key='name' className='item' href='javascript:;'>{user.name}</a>
-            <a key='frontend' className='item' href='/'>访问前台</a>
+            <span key='name' className='item'>{user.name}</span>
+            <a key='setting' className='item' href='/users/edit'>用户设置</a>
             <a key='sign-out' className='item' onClick={@do_sign_out}>登出</a>
           ]
       }
@@ -60,8 +60,7 @@
                 <a style={display: 'none'} key='avatar' className='item' href='javascript:;'>
                   <img src={user.avatar?.url} />
                 </a>
-                <a key='name' className='item' href={user.user_dashboard_url}>{user.name}</a>
-                <a key='backend' className='item' href='/manager/dashboard'>访问后台</a>
+                <span key='name' className='item' href={user.user_dashboard_url}>{user.name}</span>
                 <a key='setting' className='item' href='/users/edit'>用户设置</a>
                 <a key='sign-out' className='item' onClick={@do_sign_out}>登出</a>
               ]
