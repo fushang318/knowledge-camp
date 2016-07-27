@@ -69,4 +69,13 @@ class User
   def teller?
     role == "teller"
   end
+
+  # 柜员 user 已经学习了负责业务类别下所有课件的百分比
+  def read_percent
+    return if !self.role.teller?
+
+    percents = self.post.root_business_categories.map{ |child| child.read_percent_of_user(self) }.compact
+    return nil if percents.blank?
+    percents.sum / percents.count
+  end
 end

@@ -14,7 +14,7 @@ Bank::BusinessCategory.class_eval do
       percent_sum / wares.count
     else
       # 统计所有子节点
-      percents = children.map{ |child| child.read_percent_of_user(user) }.compact
+      percents = user.post.children_business_categories(self).map{ |child| child.read_percent_of_user(user) }.compact
       return nil if percents.blank?
       percents.sum / percents.count
     end
