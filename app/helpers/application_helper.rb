@@ -8,6 +8,11 @@ module ApplicationHelper
             name: '督导员管理',
             url: manager_supervisors_path,
             icon: 'user'
+          },
+          {
+            name: '柜员管理',
+            url: manager_tellers_path,
+            icon: 'user'
           }
         ]
       },
@@ -97,6 +102,21 @@ module ApplicationHelper
           }
         ]
       },
+    ]
+  end
+
+  def supervisor_sidebar_scenes
+    [
+     {
+      name: '柜员管理',
+      funcs: [
+        {
+          name: '柜员管理',
+          url: manager_supervisor_tellers_path,
+          icon: 'user'
+        }
+      ]
+     },
     ]
   end
 end

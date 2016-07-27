@@ -49,7 +49,10 @@
           icon: 'dashboard'
         },
 
-        scenes: manager_sidebar_scenes
+        scenes: 
+          current_user.role == "admin" ?
+            manager_sidebar_scenes :
+            supervisor_sidebar_scenes
       }
 
       top_menu_data = {
