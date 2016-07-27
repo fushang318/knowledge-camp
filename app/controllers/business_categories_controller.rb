@@ -55,6 +55,7 @@ class BusinessCategoriesController < ApplicationController
   end
 
   def my
+    authorize :business_categories, :my?
     @page_name = "post_business_categories"
 
     post = current_user.post
