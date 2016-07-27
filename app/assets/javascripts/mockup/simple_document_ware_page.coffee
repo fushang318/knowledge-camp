@@ -42,12 +42,14 @@ FIX_HEIGHT = 50
         @window_height = jQuery(window).height()
         @scrollHeight = $div_ware_page.get(0).scrollHeight
         $div_ware.css "height", @window_height
-        $div_ware_page.scroll (e) =>
-          percent = Math.floor(100 * (e.target.scrollTop + @window_height + FIX_HEIGHT) / e.target.scrollHeight)
-          if percent > @state.percent
-            @read(percent)
-            @setState
-              percent: percent
+
+        unless @props.data.in_business_categories
+          $div_ware_page.scroll (e) =>
+            percent = Math.floor(100 * (e.target.scrollTop + @window_height + FIX_HEIGHT) / e.target.scrollHeight)
+            if percent > @state.percent
+              @read(percent)
+              @setState
+                percent: percent
 
       render: ->
         @percent = 0

@@ -10,7 +10,8 @@ class SimpleDocumentWaresController < ApplicationController
       .data
 
     @component_data = {
-      ware: ware_data
+      ware: ware_data,
+      in_business_categories: ware.in_business_categories?(current_user)
     }
     render "mockup/page", layout: "new_version_ware"
   end
