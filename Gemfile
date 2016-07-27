@@ -82,7 +82,7 @@ gem 'question_mod',
 
 gem 'mongoid-simple-redis-cache',
     github: "mindpin/mongoid-simple-redis-cache",
-    ref: "f5fd2df"
+    ref: "dc893d1"
 
 # gem 'mongoid-simple-redis-cache', path: "/home/mindpin/mongoid-simple-redis-cache"
 

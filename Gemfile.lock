@@ -61,8 +61,8 @@ GIT
 
 GIT
   remote: git://github.com/mindpin/mongoid-simple-redis-cache.git
-  revision: f5fd2df221db9fa51219097edc609f024fd364ed
-  ref: f5fd2df
+  revision: dc893d169108f892bbbbbd9d4268fa320787aba5
+  ref: dc893d1
   specs:
     mongoid-simple-redis-cache (0.1.0)
       redis (~> 3.2)
