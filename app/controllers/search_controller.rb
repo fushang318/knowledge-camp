@@ -6,7 +6,10 @@ class SearchController < ApplicationController
 
     query = params[:query]
 
-    wares = ::Finance::TellerWare
+    # wares = ::Finance::TellerWare
+    #   .or({name: /#{query}/}, {number: /#{query}/})
+
+    wares = ::KcCourses::Ware
       .or({name: /#{query}/}, {number: /#{query}/})
 
     data = wares.map {|x|
