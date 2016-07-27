@@ -7,11 +7,10 @@
 
     manager_sign_in_url = @props.data.manager_sign_in_url
 
-    manager_button =
-      <a className='ui basic button' style={manager_button_style} href={manager_sign_in_url}>后台登录</a>
+    # manager_button =
+    #   <a className='ui basic button' style={manager_button_style} href={manager_sign_in_url}>后台登录</a>
 
     <div className='auth-bank-sign-in-page'>
-      {manager_button}
 
       <div className='ui container'>
         <div className='ui grid'>

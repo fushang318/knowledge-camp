@@ -6,10 +6,7 @@ class IndexController < ApplicationController
       if current_user.role.teller?
         return redirect_to my_business_categories_path
       end
-      if current_user.role.supervisor?
-        return redirect_to business_categories_path
-      end
-      if current_user.role.admin?
+      if current_user.role.supervisor? || current_user.role.admin?
         return redirect_to manager_dashboard_path
       end
     else

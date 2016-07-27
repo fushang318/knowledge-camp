@@ -24,21 +24,25 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-    @page_name = 'user_edit'
     @component_data = {
-      user: DataFormer.new(current_user).data,
+      user: DataFormer.new(current_user).logic(:role).data,
       update_url: "/users"
     }
+
+    if current_user.role.admin? || current_user.role.supervisor?
+      @page_name = 'admin_or_supervisor_edit'
+      render "/mockup/page", layout: 'new_version_manager'
+    else
+      @page_name = 'user_edit'
+      render "/mockup/page", layout: 'new_version_base'
+    end
   end
 
   def update
-    user_params = params.require(:users).permit(:name, :password, :current_password)
-    user_params.delete :password if user_params[:password].blank?
-
-    if user_params[:current_password].blank?
-      result = current_user.update_without_password(user_params)
+    if current_user.role.admin? || current_user.role.supervisor?
+      result = _update_admin_or_supervisor
     else
-      result = current_user.update_with_password(user_params)
+      result = _update_teller
     end
 
     if result
@@ -48,6 +52,22 @@ class RegistrationsController < Devise::RegistrationsController
     else
       data = current_user.errors.messages
       render json: data, :status => 422
+    end
+  end
+
+  def _update_admin_or_supervisor
+    user_params = params.require(:users).permit(:password, :current_password)
+    current_user.update_with_password(user_params)
+  end
+
+  def _update_teller
+    user_params = params.require(:users).permit(:name, :password, :current_password)
+    user_params.delete :password if user_params[:password].blank?
+
+    if user_params[:current_password].blank?
+      return current_user.update_without_password(user_params)
+    else
+      return current_user.update_with_password(user_params)
     end
   end
 

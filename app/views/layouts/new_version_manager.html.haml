@@ -49,7 +49,7 @@
           icon: 'dashboard'
         },
 
-        scenes: 
+        scenes:
           current_user.role == "admin" ?
             manager_sidebar_scenes :
             supervisor_sidebar_scenes
@@ -57,7 +57,7 @@
 
       top_menu_data = {
         sign_out_url: api_sign_out_path,
-        sign_out_to_url: sign_in_path(role: 'manager')
+        sign_out_to_url: sign_in_path
       }
       current_user_data = DataFormer.new(current_user).data
 

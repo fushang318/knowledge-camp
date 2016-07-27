@@ -605,3 +605,69 @@ body.manager {
     padding: 1rem 0;
   }
 }
+
+.manager-supervisor-teller-show-page{
+  .ui.segment.base{
+    padding: 2rem;
+
+    .info{
+      padding-bottom: 0.5rem;
+      overflow: hidden;
+      label{
+        float: left;
+        width: 100px;
+        text-align: right;
+      }
+      .value{
+        float: left;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .teller-business-categories-read-percent{
+    box-shadow: none !important;
+    @include clearfix;
+    padding: 0;
+
+    .back{
+      float: left;
+      font-size: 32px;
+    }
+
+    .categories {
+      float: left;
+      border-right: solid 1px #ddd;
+      width: 100px;
+      padding: 1rem;
+      overflow:hidden;
+      background-color: #fafafa;
+
+      .category {
+        a {
+          padding: 0.5rem;
+          display: block;
+          font-size: 16px;
+          width:300px;
+          color: #333;
+          &:hover {
+            background-color: lighten(#008DD4, 50%);
+          }
+        }
+        &.active a {
+          background-color: #008DD4;
+          color: white;
+        }
+      }
+
+      &.current {
+        width: 300px;
+        background-color: #FFF;
+        .category a {color: #008DD4;}
+        .category.active a {
+          background-color: lighten(#008DD4, 40%);
+        }
+      }
+    }
+  }
+}

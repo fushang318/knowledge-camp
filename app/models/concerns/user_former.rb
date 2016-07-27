@@ -18,8 +18,24 @@ module UserFormer
         }
       }
 
+      logic :role, ->(instance) {
+        instance.role
+      }
+
       logic :phone_number, ->(instance){
         instance.phone_number
+      }
+
+      logic :read_percent, ->(instance){
+        instance.read_percent
+      }
+
+      logic :post, ->(instance){
+        post = instance.post
+        {
+          id: post.id.to_s,
+          name: post.name
+        }
       }
 
       url :user_dashboard_url, ->(instance) {
@@ -28,6 +44,10 @@ module UserFormer
 
       url :manager_supervisors_edit_url, ->(instance) {
         edit_manager_supervisor_path(instance)
+      }
+
+      url :supervisor_teller_show_url, ->(instance) {
+        manager_supervisor_teller_path(instance)
       }
 
     end
