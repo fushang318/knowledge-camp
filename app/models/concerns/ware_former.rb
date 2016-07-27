@@ -20,10 +20,11 @@ module WareFormer
       }
 
       field :video_url, ->(instance){
-        instance.file_entity.transcode_url("超请") ||
-          instance.file_entity.transcode_url("高请") ||
-          instance.file_entity.transcode_url("标清") ||
-          instance.file_entity.transcode_url("低清") ||
+        # TODO 目前转码的清晰度有问题，暂时永远播放源文件
+        # instance.file_entity.transcode_url("超请") ||
+        #   instance.file_entity.transcode_url("高请") ||
+        #   instance.file_entity.transcode_url("标清") ||
+        #   instance.file_entity.transcode_url("低清") ||
           instance.file_entity.url
       }
 
