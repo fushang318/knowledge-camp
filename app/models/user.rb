@@ -60,14 +60,21 @@ class User
 
   # 角色
   extend Enumerize
-  enumerize :role, in: [:teller, :supervisor, :admin], default: :teller, scope: true
+  ROLES = %w[teller supervisor admin]
+  enumerize :role, in: ROLES, default: :teller, scope: true
   field :phone_number, type: String
   validates :phone_number, uniqueness: true, if: :teller?
   validates :phone_number, presence: true, if: :teller?
   belongs_to :post, class_name: 'EnterprisePositionLevel::Post'
 
-  def teller?
-    role == "teller"
+  ROLES.each do |r|
+    define_method "#{r}?" do
+      role == r
+    end
+  end
+
+  def self.roles
+    ROLES
   end
 
   # 柜员 user 已经学习了负责业务类别下所有课件的百分比
