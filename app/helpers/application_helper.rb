@@ -108,10 +108,10 @@ module ApplicationHelper
   def supervisor_sidebar_scenes
     [
      {
-      name: '柜员管理',
+      name: '柜员',
       funcs: [
         {
-          name: '柜员管理',
+          name: '柜员学习进度',
           url: manager_supervisor_tellers_path,
           icon: 'user'
         }

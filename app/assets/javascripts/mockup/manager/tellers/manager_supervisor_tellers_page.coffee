@@ -39,5 +39,5 @@
         }
 
         <div className='ui segment'>
-          <ManagerTable data={table_data} title='柜员管理' />
+          <ManagerTable data={table_data} title='柜员学习进度' />
         </div>
