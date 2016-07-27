@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   protect_from_forgery with: :exception
 
   # 自定义登录后页面跳转

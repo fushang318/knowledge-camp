@@ -258,6 +258,8 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     qiniu (6.4.2)
       json (~> 1.8)
       mime-types (~> 2.4.3)
@@ -423,6 +425,7 @@ DEPENDENCIES
   pry
   pry-byebug
   pry-rails
+  pundit (= 1.1.0)
   question_mod!
   quiet_assets
   rails (= 4.2.3)
