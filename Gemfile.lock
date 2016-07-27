@@ -7,8 +7,8 @@ GIT
 
 GIT
   remote: git://github.com/kc-train/phone_number_check_mod.git
-  revision: 8cbbe61793d28b2fa43eb3d623774612c7082d6d
-  tag: 0.0.1
+  revision: b423a088506e2598788860018fb845658ac37ea1
+  tag: 0.0.2
   specs:
     phone_number_check_mod (0.0.1)
 

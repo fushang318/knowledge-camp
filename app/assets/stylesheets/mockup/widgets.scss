@@ -395,3 +395,28 @@
     margin-bottom: 1rem;
   }
 }
+
+.progress-bar{
+  margin: 10px 0;
+  width: 200px;
+  height: 10px;
+  line-height: 10px;
+  position: relative;
+  .bar{
+    position: absolute;
+    top:0;left:0;bottom:0;right:50px;
+    background-color: #f3f3f3;
+    border-radius: 100px;
+    .percent-bar{
+      border-radius: 100px;
+      height: 100%;
+      background-color: #2db7f5;
+    }
+  }
+  .text{
+    position: absolute;
+    top:0;bottom:0;right:0;
+    width: 45px;
+    font-size: 12px;
+  }
+}

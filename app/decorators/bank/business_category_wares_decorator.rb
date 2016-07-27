@@ -14,6 +14,10 @@ module Bank
       wares_db(Finance::TellerWare)
     end
 
+    def all_wares_of_post_db(post)
+      wares_of_post_db(post, KcCourses::Ware)
+    end
+
     def simple_video_wares_of_post_db(post)
       wares_of_post_db(post, KcCourses::SimpleVideoWare)
     end
@@ -39,6 +43,10 @@ module Bank
       end.inject do |wares1, wares2|
         wares1 = wares1 & wares2
       end
+    end
+
+    def all_wares_db
+      wares_db(KcCourses::Ware)
     end
 
     def wares_db(ware_type_class)

@@ -35,6 +35,10 @@ module WareFormer
         learned
       }
 
+      logic :read_percent_of_user, ->(instance, user){
+        instance.read_percent_of_user(user)
+      }
+
       url :url, ->(instance){
         ""
       }
@@ -61,6 +65,10 @@ module WareFormer
 
       url :manager_edit_business_categories_url, ->(instance){
         edit_business_categories_manager_simple_video_ware_path(instance)
+      }
+
+      url :show_url, ->(instance) {
+        simple_video_ware_path(instance)
       }
 
     end
@@ -91,6 +99,10 @@ module WareFormer
         learned
       }
 
+      logic :read_percent_of_user, ->(instance, user){
+        instance.read_percent_of_user(user)
+      }
+
       url :url, ->(instance){
         ware_path(instance.id.to_s)
       }
@@ -117,6 +129,10 @@ module WareFormer
 
       url :manager_edit_business_categories_url, ->(instance){
         edit_business_categories_manager_simple_document_ware_path(instance)
+      }
+
+      url :show_url, ->(instance) {
+        simple_document_ware_path(instance)
       }
     end
 

@@ -88,7 +88,7 @@ gem 'mongoid-simple-redis-cache',
 
 gem 'phone_number_check_mod',
   :github => 'kc-train/phone_number_check_mod',
-  :tag => '0.0.1'
+  :tag => '0.0.2'
 # ----------------------------------
 
 gem 'sprockets', '3.4.0'
