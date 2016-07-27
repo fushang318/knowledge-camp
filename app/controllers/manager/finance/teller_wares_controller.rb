@@ -35,6 +35,9 @@ class Manager::Finance::TellerWaresController < ApplicationController
   def preview
     ware = ::Finance::TellerWare.where(number: params[:number]).first
 
+    # 如果在此用户业务分类内，则直接设置阅读进度100%
+    ware.set_read_percent_by_user(current_user, 100) if ware.in_business_categories?(current_user)
+
     @page_name = "manager_finance_teller_ware_preview"
     @component_data = DataFormer.new(ware)
       .logic(:actions)

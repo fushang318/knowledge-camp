@@ -46,7 +46,12 @@
             switch @ware.kind
               when 'video'
                 <div className='video-box'>
-                  <Ware.Video data={@ware} timeupdate={@timeupdate} ended={@ended} />
+                  {
+                    if @props.data.in_business_categories
+                      <Ware.Video data={@ware} />
+                    else
+                      <Ware.Video data={@ware} timeupdate={@timeupdate} ended={@ended} />
+                  }
                 </div>
           }
           </div>
