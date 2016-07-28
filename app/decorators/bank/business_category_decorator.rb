@@ -25,8 +25,15 @@ Bank::BusinessCategory.class_eval do
     raise if user.blank?
     return 0 if user.post.blank?
 
+
     post_business_category_ids = user.post.business_category_ids.map{|bid|bid.to_s}
-    leaf_business_category_ids = self.leaves.map{|l|l.id.to_s}
+
+    if self.leaf?
+      leaf_business_category_ids = [self.id.to_s]
+    else
+      leaf_business_category_ids = self.leaves.map{|l|l.id.to_s}
+    end
+
     ids = post_business_category_ids & leaf_business_category_ids
 
     ware_ids = KcCourses::Ware
