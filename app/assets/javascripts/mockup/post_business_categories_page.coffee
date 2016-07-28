@@ -31,24 +31,47 @@
                   if bc.is_leaf
                     <a href="/business_categories/my?pid=#{bc.id}">
                       <span><i className='icon circle' /> {bc.name}({bc.number})</span>
-                      <ProgressBar percent={bc.read_percent_of_user} />
+                      {
+                        if bc.read_percent_of_user != null
+                          <ProgressBar percent={bc.read_percent_of_user} />
+                        else
+                          <div className="no-progress-bar">
+                          没有课件
+                          </div>
+                      }
                     </a>
                   else
                     <a href="/business_categories/my?pid=#{bc.id}">
                       <span>{bc.name}</span>
-                      <ProgressBar percent={bc.read_percent_of_user} />
+                      {
+                        if bc.read_percent_of_user != null
+                          <ProgressBar percent={bc.read_percent_of_user} />
+                        else
+                          <div className="no-progress-bar">
+                          没有课件
+                          </div>
+                      }
                     </a>
                 }
               </div>
           }
           </div>
 
-          <div className='wares'>
-            {
-              for ware in @props.data.wares
-                <WareCard data={ware} />
-            }
-          </div>
+          {
+            if @props.data.current_category
+              <div className='wares'>
+                {
+                  if @props.data.wares.length > 0
+                    for ware in @props.data.wares
+                      <WareCard data={ware} />
+                  else
+                    <div className="no-ware">
+                      该业务下没有课件
+                    </div>
+                }
+              </div>
+          }
+
         </div>
       </div>
     </div>

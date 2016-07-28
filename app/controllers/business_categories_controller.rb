@@ -48,6 +48,7 @@ class BusinessCategoriesController < ApplicationController
     end
 
     @component_data = {
+      current_category: params[:pid].blank? ? nil : parent_bc,
       parents_data: parents_data,
       categories: data,
       wares: wares
@@ -107,6 +108,7 @@ class BusinessCategoriesController < ApplicationController
 
 
     @component_data = {
+      current_category: params[:pid].blank? ? nil : parent_bc,
       parents_data: parents_data,
       categories: data,
       wares: wares
