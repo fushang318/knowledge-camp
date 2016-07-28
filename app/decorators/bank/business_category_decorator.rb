@@ -23,7 +23,7 @@ Bank::BusinessCategory.class_eval do
   # user 已经学习了该业务类别下所有课件的百分比
   def read_percent_of_user(user)
     raise if user.blank?
-    return 0 if user.post.blank?
+    return nil if user.post.blank?
 
 
     post_business_category_ids = user.post.business_category_ids.map{|bid|bid.to_s}
@@ -40,7 +40,7 @@ Bank::BusinessCategory.class_eval do
       .where(:business_category_ids.in => ids)
       .only(:id).map{|w|w.id.to_s}
 
-    return 0 if ware_ids.blank?
+    return nil if ware_ids.blank?
     user.read_percent_in_wares(ware_ids)
   end
 

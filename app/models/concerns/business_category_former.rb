@@ -28,7 +28,7 @@ module BusinessCategoryFormer
       }
 
       logic :read_percent_of_user, ->(instance, user) {
-        instance.read_percent_of_user(user) || 0
+        instance.read_percent_of_user(user)
       }
 
     end

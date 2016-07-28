@@ -364,6 +364,11 @@
       float: left;
       width: 250px;
 
+      .no-ware{
+        padding: 10px;
+        color: #888;
+      }
+
       .ware{
         padding: 10px;
         margin-bottom: 10px;
@@ -462,6 +467,11 @@
       float: left;
       width: 250px;
 
+      .no-ware{
+        padding: 10px;
+        color: #888;
+      }
+
       .ware{
         padding: 10px;
         margin-bottom: 10px;
@@ -542,6 +552,11 @@
     &.current {
       width: 300px;
       background-color: #FFF;
+      .no-progress-bar{
+        padding: 0.5rem;
+        font-size: 14px;
+        color: #888;
+      }
       .category a {color: #008DD4;}
       .category.active a {
         background-color: lighten(#008DD4, 40%);
