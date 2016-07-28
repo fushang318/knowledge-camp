@@ -31,18 +31,10 @@ module Bank
     end
 
     def wares_of_post_db(post, ware_type_class)
-      if self.leaf?
-        return ware_type_class.where(:business_category_ids.in => [self.id.to_s]).to_a
-      end
-
-      bcs = post.children_business_categories(self)
-      return [] if bcs.blank?
-
-      bcs.map do |bc|
-        bc.wares_of_post_db(post, ware_type_class)
-      end.inject do |wares1, wares2|
-        wares1 = wares1 & wares2
-      end
+      post_business_category_ids = post.business_category_ids.map{|bid|bid.to_s}
+      leaf_business_category_ids = self.leaves.map{|l|l.id.to_s}
+      ids = post_business_category_ids & leaf_business_category_ids
+      ware_type_class.where(:business_category_ids.all => ids).to_a
     end
 
     def all_wares_db
@@ -50,15 +42,8 @@ module Bank
     end
 
     def wares_db(ware_type_class)
-      if self.leaf?
-        return ware_type_class.where(:business_category_ids.in => [self.id.to_s]).to_a
-      end
-
-      self.children.map do |bc|
-        bc.wares_db(ware_type_class)
-      end.inject do |wares1, wares2|
-        wares1 = wares1 & wares2
-      end
+      leaf_business_category_ids = self.leaves.map{|l|l.id.to_s}
+      ware_type_class.where(:business_category_ids.all => leaf_business_category_ids).to_a
     end
 
   end
