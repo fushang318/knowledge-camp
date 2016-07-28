@@ -1,7 +1,9 @@
 class Manager::DashboardController < Manager::ApplicationController
   include ApplicationHelper
+  skip_before_filter :pundit_manager
 
   def index
+    authorize :manager_dashboard, :index?
     @page_name = "manager_dashboard"
     @component_data = {
       scenes: 

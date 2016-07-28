@@ -103,6 +103,8 @@ gem 'web-console', '~> 2.0'
 # 去除静态资源指纹
 gem 'non-stupid-digest-assets'
 
+gem "pundit", "1.1.0"
+
 # 通过 rails assets 服务加载前端包
 source 'https://rails-assets.org'
 gem 'rails-assets-semantic'

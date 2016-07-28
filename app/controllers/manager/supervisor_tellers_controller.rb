@@ -75,4 +75,9 @@ class Manager::SupervisorTellersController < Manager::ApplicationController
     }
 
   end
+
+  private
+  def pundit_manager
+    authorize :manager_supervisor, "#{action_name}?"
+  end
 end

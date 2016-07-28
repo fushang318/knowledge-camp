@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   protect_from_forgery with: :exception
 
   # 自定义登录后页面跳转
@@ -49,4 +50,7 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_up) << :name
     end
 
+    def pundit_manager
+      authorize :manager, "#{action_name}?"
+    end
 end

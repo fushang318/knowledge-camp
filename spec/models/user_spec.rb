@@ -1,12 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it "teller?" do
-    # 默认为柜员
-    expect(build(:user).teller?).to be true
+  it "User.roles" do
+    expect(User.roles).to eq %w[teller supervisor admin]
+  end
 
-    expect(create(:user, role: :supervisor).teller?).to be false
-    expect(create(:user, role: :admin).teller?).to be false
+  it "role默认为teller" do
+    expect(create(:user).role).to eq "teller"
+  end
+
+  User.roles.each do |role|
+    it "#{role}?" do
+      expect(create(:user, role: role).send("#{role}?")).to be true
+    end
   end
 
   describe "手机号验证" do
