@@ -50,4 +50,7 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_up) << :name
     end
 
+    def pundit_manager
+      authorize :manager, "#{action_name}?"
+    end
 end
