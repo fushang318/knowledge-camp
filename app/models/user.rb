@@ -72,10 +72,21 @@ class User
 
   # 柜员 user 已经学习了负责业务类别下所有课件的百分比
   def read_percent
-    return if !self.role.teller?
+    return 0 if !self.role.teller?
+    return 0 if self.post.blank?
 
-    percents = self.post.root_business_categories.map{ |child| child.read_percent_of_user(self) }.compact
-    return nil if percents.blank?
-    percents.sum / percents.count
+    post_business_category_ids = self.post.business_category_ids.map{|bid|bid.to_s}
+
+    ware_ids = KcCourses::Ware
+      .where(:business_category_ids.in => post_business_category_ids)
+      .only(:id).map{|w|w.id.to_s}
+
+    read_percent_in_wares(ware_ids)
+  end
+
+  def read_percent_in_wares(ware_ids)
+    reads = ware_readings.where(:ware_id.in => ware_ids)
+    return 0 if reads.blank?
+    reads.sum(:read_percent) / ware_ids.count
   end
 end
