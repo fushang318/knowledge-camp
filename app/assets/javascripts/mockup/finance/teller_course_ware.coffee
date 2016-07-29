@@ -244,17 +244,6 @@ OEP = React.createClass
         nav =
           <div className='nav'>
             <div>
-              <a href='javascript:;' onClick={@show_question_modal}>
-                <i className='icon question'/>
-                提问讨论
-              </a>
-              <a href='javascript:;' onClick={@show_note_modal}>
-                <i className='icon pencil'/>
-                记录笔记
-              </a>
-            </div>
-
-            <div>
               <a href='javascript:;' onClick={@focus_prev}>
                 <i className='icon chevron left'/>
                 上一步　
