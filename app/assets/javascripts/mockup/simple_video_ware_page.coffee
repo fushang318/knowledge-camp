@@ -48,9 +48,9 @@
                 <div className='video-box'>
                   {
                     if @props.data.in_business_categories
-                      <Ware.Video data={@ware} />
-                    else
                       <Ware.Video data={@ware} timeupdate={@timeupdate} ended={@ended} />
+                    else
+                      <Ware.Video data={@ware} />
                   }
                 </div>
           }
