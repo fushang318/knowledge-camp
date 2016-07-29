@@ -9,7 +9,9 @@ RSpec.describe Bank::BusinessCategory, type: :model do
   it "has_read_by_user?" do
     @business_category = create(:business_category)
     @ware = create(:ware)
-    @user = create(:user)
+    @post = create(:post)
+    @user = create(:user, post: @post)
+    @post.business_categories << @business_category
     @ware.business_categories << @business_category
 
     expect(@business_category.has_read_by_user?(@user)).to be false
@@ -49,9 +51,14 @@ RSpec.describe Bank::BusinessCategory, type: :model do
         # |     |-w8 无数据
         # |-8 无课件
         before do
+          @post = create(:post)
+          @user.post = @post
+          @user.save
+
           (1..8).each do |i|
             eval("@c#{i} = create(:business_category)")
             eval("@w#{i} = create(:ware)")
+            eval("@post.business_categories << @c#{i}")
           end
 
           @c1.children << @c2
@@ -112,8 +119,8 @@ RSpec.describe Bank::BusinessCategory, type: :model do
           # 因为返回的是整数，往下处理，所以此处为52非52.5
           expect(@c4.read_percent_of_user(@user)).to eq 52
 
-          # 35.66 ~= 35
-          expect(@c1.read_percent_of_user(@user)).to eq 35
+          # 20+30+..+70 / 8 = 43.75
+          expect(@c1.read_percent_of_user(@user)).to eq 43
         end
       end
     end

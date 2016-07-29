@@ -6,7 +6,7 @@ KcCourses::Ware.class_eval do
 
   def in_business_categories?(user)
     raise "用户不能为空" if user.nil?
-    category_ids = user.post.try(:business_category_ids).to_a.map(&:to_s)
+    category_ids = user.post.try(:business_category_ids).to_a.compact.map(&:to_s)
     business_categories.where(:id.in => category_ids).any?
   end
 end
