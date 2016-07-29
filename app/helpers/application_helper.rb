@@ -32,31 +32,6 @@ module ApplicationHelper
         ]
       },
       {
-        name: '课程编排',
-        funcs: [
-          {
-            name: '开课管理',
-            url: manager_courses_path,
-            icon: 'newspaper'
-          },
-          {
-            name: '分类管理',
-            url: manager_course_subjects_path,
-            icon: 'tag'
-          },
-        ]
-      },
-      {
-        name: '课程维护',
-        funcs: [
-          {
-            name: '课程发布',
-            url: manager_published_courses_path,
-            icon: 'send'
-          }
-        ]
-      },
-      {
         name: '培训策略管理',
         funcs: [
           {
@@ -69,11 +44,6 @@ module ApplicationHelper
             url: manager_enterprise_posts_path,
             icon: 'sitemap'
           },
-          {
-            name: '级别设置',
-            url: manager_enterprise_levels_path,
-            icon: 'sitemap'
-          }
         ]
       },
 
