@@ -18,7 +18,7 @@
           image: 'http://i.teamkn.com/i/WvMTqFbH.png',
           url: mockup_url(page: 'home')
         },
-        
+
         nav_items: [
           {
             name: '课程类目一',
@@ -47,7 +47,7 @@
             ]
           }
         ],
-        
+
         right: {
           '登录' => mockup_auth_url(page: 'sign_in'),
           '注册' => mockup_auth_url(page: 'sign_up'),
@@ -67,12 +67,12 @@
       footer_data = {
         logo: 'http://i.teamkn.com/i/uJnxbhr3.png',
         links: {
-          '关于' => mockup_url(page: 'about'),
-          '使用帮助' => mockup_url(page: 'help'),
-          '联系我们' => mockup_url(page: 'contact'),
-          '服务条款' => mockup_url(page: 'terms'),
+          '关于' => "#",
+          '使用帮助' => "#",
+          '联系我们' => "#",
+          '服务条款' => "#",
         },
-        desc: '京ICP备********号 ©2016 MINDPIN'
+        desc: '@2016 联怡科技'
       }
 
     = react_component 'LayoutFooter', data: footer_data
